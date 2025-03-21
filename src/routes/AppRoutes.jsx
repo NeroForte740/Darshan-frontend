@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
+import RegisterPage from "../pages/RegisterPage";
 
 const AppRoutes = () => {
   return (
@@ -12,6 +13,7 @@ const AppRoutes = () => {
         <Route path="/home" element={<HomePage />} />
         <Route path="/forgotPassword" element={<ForgotPasswordPage />} />
         <Route path="*" element={<NotFoundPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </Router>
   );

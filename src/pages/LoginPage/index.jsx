@@ -8,9 +8,7 @@ const LoginPage = () => {
 
     return (
         <div className="grid w-full h-full">
-            <div className="flex flex-col md:flex-row justify-center items-center 
-            divide-gray-300 divide-solid divide-y-2 md:divide-x-2 md:divide-y-0"
-            >
+            <div className="flex flex-col md:flex-row justify-center items-center">
                 <LoginLogo />
                 <LoginForm />
             </div>
