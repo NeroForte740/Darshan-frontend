@@ -1,7 +1,7 @@
 import React from "react";
 
 import Footer from "../../components/Footer";
-import LoginLogo from "./components/LoginLogo";
+import LogoContainer from "../../components/LogoContainer";
 import LoginForm from "./components/LoginForm";
 
 const LoginPage = () => {
@@ -9,7 +9,7 @@ const LoginPage = () => {
     return (
         <div className="grid w-full h-full">
             <div className="flex flex-col md:flex-row justify-center items-center">
-                <LoginLogo />
+                <LogoContainer />
                 <LoginForm />
             </div>
             <Footer />

@@ -1,9 +1,9 @@
 import React from "react";
-import Logo from "../../../assets/logo.svg";
+import Logo from "../assets/logo.svg";
 
-const LoginLogo = () => {
+const LogoContainer = () => {
     return (
-        <div className="grid place-items-center p-5 md:p-20 lg:p-28 w-full max-w-lg">
+        <div className="grid place-items-center md:p-5 lg:p-20 w-full max-w-lg">
             <img className="h-25 sm:h-30 md:h-50 mb-2 sm:mb-5" src={Logo} />
             <span className="text-black text-2xl sm:text-3xl md:text-5xl">
                 Darshan
@@ -12,4 +12,4 @@ const LoginLogo = () => {
     )
 }
 
-export default LoginLogo;
+export default LogoContainer;
