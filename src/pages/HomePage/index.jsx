@@ -49,15 +49,20 @@ function HomePage() {
 
   }
 
+  const onPressPayment = () => {
+    
+  }
+
   return (
     <div className='grid w-full h-full'>
       <div className='w-full md:h-4/5 flex flex-col justify-around md:flex-row md:justify-between md:items-end md:pt-20'>
         <HomeButtons 
           onPressNewOrder={() => onPressNewOrder()}
+          onPressPayment={() => onPressPayment()}
           onPressEditOrder={() => onPressEditOrder()}
           onPressCancelOrder={() => onPressCancelOrder()}
         />
-        <HomeOrdersList orders={orders} setPickedOrder={setPickedOrder} />
+        <HomeOrdersList orders={orders} pickedOrder={pickedOrder} setPickedOrder={setPickedOrder} />
       </div>
       <Footer />
       <EditOrderModal 
