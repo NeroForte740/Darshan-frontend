@@ -39,11 +39,6 @@ const LoginForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            <div className="flex flex-col w-full items-end">
-                <span className="text-sm text-black font-semibold cursor-pointer mt-1" onClick={() => navigate("/forgotPassword")}>
-                    Esqueceu a senha?
-                </span>
-            </div>
             <div className="flex w-full justify-between mt-8">
                 <button
                     className="text-sm bg-violet-800 hover:bg-violet-900 text-white rounded-3xl border-none px-10 py-2 cursor-pointer"
