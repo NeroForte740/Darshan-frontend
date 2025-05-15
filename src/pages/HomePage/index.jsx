@@ -9,18 +9,7 @@ import EditOrderModal from './components/EditOrderModal';
 import { getAllOrders, cancelOrder } from '../../api/ordersService';
 
 function HomePage() {
-  const [orders, setOrders] = useState([
-      { id: 1, descricao: "Pizza Margherita" },
-      { id: 2, descricao: "Hambúrguer Artesanal com Batata" },
-      { id: 3, descricao: "Sushi Sashimi Variado" },
-      { id: 4, descricao: "Salada Caesar com Frango Grelhado" },
-      { id: 5, descricao: "Lasanha à Bolonhesa" },
-      { id: 6, descricao: "Moqueca de Peixe" },
-      { id: 7, descricao: "Strogonoff de Frango com Arroz" },
-      { id: 8, descricao: "Espaguete Carbonara" },
-      { id: 9, descricao: "Feijoada Completa" },
-      { id: 10, descricao: "Sorvete de Chocolate com Calda" },
-  ]);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [cancelLoading, setCancelLoading] = useState(false);
@@ -71,7 +60,7 @@ function HomePage() {
     }
   };
 
-  const onPressCancelOrder = () => {
+  const onClickCancelOrder = () => {
     if(pickedOrder) {
       setIsCancelOrderModalOpen(true)
     } else {
@@ -79,7 +68,7 @@ function HomePage() {
     }
   }
 
-  const onPressEditOrder = () => {
+  const onClickEditOrder = () => {
     if(pickedOrder) {
       setIsEditOrderModalOpen(true)
     } else {
@@ -87,11 +76,11 @@ function HomePage() {
     }
   }
 
-  const onPressNewOrder = () => {
+  const onClickNewOrder = () => {
 
   }
 
-  const onPressPayment = () => {
+  const onClickPayment = () => {
     
   }
 
@@ -99,10 +88,10 @@ function HomePage() {
     <div className='grid w-full h-full'>
       <div className='w-full md:h-full flex flex-col-reverse justify-around md:flex-row md:justify-between md:items-center'>
         <HomeButtons 
-          onPressNewOrder={() => onPressNewOrder()}
-          onPressPayment={() => onPressPayment()}
-          onPressEditOrder={() => onPressEditOrder()}
-          onPressCancelOrder={() => onPressCancelOrder()}
+          onClickNewOrder={() => onClickNewOrder()}
+          onClickPayment={() => onClickPayment()}
+          onClickEditOrder={() => onClickEditOrder()}
+          onClickCancelOrder={() => onClickCancelOrder()}
         />
         {loading ? (
           <div className="flex items-center justify-center w-full">

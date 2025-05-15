@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Modal from '../../../components/Modal';
+import CustomButton from '../../../components/CustomButton';
 
 const CancelOrderModal = (props) => {
     const {
@@ -17,20 +18,23 @@ const CancelOrderModal = (props) => {
             <p className='mb-4'>Deseja mesmo cancelar esse pedido?</p>
             <div className='flex justify-end space-x-2'>
                 <div className='flex justify-between items-center w-full'>
-                    <button
+                    <CustomButton
                         onClick={() => setIsCancelOrderModalOpen(false)}
-                        className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 cursor-pointer'
-                        disabled={cancelLoading}
+                        text="Fechar"
+                        color="gray"
+                        paddingVertical="py-2"
+                        paddingHorizontal="px-4"
                     >
                         Fechar
-                    </button>
-                    <button 
+                    </CustomButton>
+                    <CustomButton 
                         onClick={onCancelOrder}
+                        text="Cancelar pedido"
+                        color="red"
+                        paddingVertical="py-2"
+                        paddingHorizontal="px-4"
                         disabled={cancelLoading}
-                        className='px-4 py-2 bg-red-800 text-white rounded hover:bg-red-900 cursor-pointer'
-                    >
-                        {cancelLoading ? 'Cancelando...' : 'Cancelar pedido'}
-                    </button>
+                    />
                 </div>
             </div>
         </Modal>

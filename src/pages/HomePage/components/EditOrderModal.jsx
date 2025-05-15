@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Modal from '../../../components/Modal';
+import CustomButton from '../../../components/CustomButton';
 
 const EditOrderModal = (props) => {
     const {
@@ -15,15 +16,20 @@ const EditOrderModal = (props) => {
             <p className='mb-4'>Editar pedido:</p>
             <div className='flex justify-end space-x-2'>
                 <div className='flex justify-between items-center w-full'>
-                    <button
+                    <CustomButton
                         onClick={() => setIsEditOrderModalOpen(false)}
-                        className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 cursor-pointer'
-                    >
-                        Fechar
-                    </button>
-                    <button className='px-4 py-2 bg-violet-700 text-white rounded hover:bg-violet-800 cursor-pointer'>
-                        Salvar
-                    </button>
+                        text="Fechar"
+                        color="gray"
+                        paddingVertical="py-2"
+                        paddingHorizontal="px-4"
+                    />
+                    <CustomButton 
+                        onClick={() => {}}
+                        text="Salvar"
+                        color="purple"
+                        paddingVertical="py-2"
+                        paddingHorizontal="px-4"
+                    />
                 </div>
             </div>
         </Modal>

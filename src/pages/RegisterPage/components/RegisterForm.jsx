@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import CustomButton from "../../../components/CustomButton";
+
 import { registerUser } from "../../../api/authService"
 
 const RegisterForm = () => {
@@ -15,7 +17,7 @@ const RegisterForm = () => {
 
       const navigate = useNavigate();
 
-      const onPressGoBack = (event) => {
+      const onClickGoBack = (event) => {
         event.preventDefault();
         navigate("/");
     };
@@ -117,20 +119,22 @@ const RegisterForm = () => {
 
             <p className="text-sm text-red-500 font-normal mt-5 h-5">{errors.backend}</p>
             
-            <div className="flex w-full justify-between">
-                <button
-                    className="text-sm bg-violet-800 hover:bg-violet-900 text-white rounded-3xl border-none px-10 py-2 cursor-pointer"
-                    onClick={(e) => onPressGoBack(e)}
-                >
-                    Voltar
-                </button>
-                <button
-                    className="text-sm bg-violet-800 hover:bg-violet-900 text-white rounded-3xl border-none px-10 py-2 cursor-pointer"
-                    type="submit" 
-                    disabled={loading}
-                >
-                    {loading ? "Cadastrando..." : "Cadastrar"}
-                </button>
+            <div className="flex w-full justify-between gap-4">
+            <CustomButton
+                    onClick={(e) => onClickGoBack(e)}
+                    text="Voltar"
+                    color="purple"
+                    paddingVertical="py-2"
+                    borderRadius="rounded-3xl"
+                />
+                <CustomButton
+                    type="submit"
+                    text="Cadastrar"
+                    color="purple"
+                    paddingVertical="py-2"
+                    borderRadius="rounded-3xl"
+                    loading={loading}
+                />
             </div>
         </form>       
     )

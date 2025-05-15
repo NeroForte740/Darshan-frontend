@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import CustomButton from "../../../components/CustomButton";
+
 import { loginUser } from "../../../api/authService";
 
 const LoginForm = () => {
@@ -74,20 +76,22 @@ const LoginForm = () => {
                 </div>
             </div>
             {errors.backend && <p className="text-sm text-red-500 font-normal mt-2">{errors.backend}</p>}
-            <div className="flex w-full justify-between mt-8">
-                <button
-                    className="text-sm bg-violet-800 hover:bg-violet-900 text-white rounded-3xl border-none px-10 py-2 cursor-pointer"
+            <div className="flex w-full justify-between mt-8 gap-4">
+                <CustomButton
                     onClick={(e) => handleRegister(e)}
-                >
-                    Cadastrar
-                </button>
-                <button
-                    className="text-sm bg-violet-800 hover:bg-violet-900 text-white rounded-3xl border-none px-10 py-2 cursor-pointer"
+                    text="Cadastrar"
+                    color="purple"
+                    paddingVertical="py-2"
+                    borderRadius="rounded-3xl"
+                />
+                <CustomButton
                     type="submit"
-                    disabled={loading}
-                >
-                    {loading ? "Entrando..." : "Entrar"}
-                </button>
+                    text='Entrar'
+                    color="purple"
+                    paddingVertical="py-2"
+                    borderRadius="rounded-3xl"
+                    loading={loading}
+                />
             </div>
         </form>       
     )
