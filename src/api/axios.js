@@ -27,6 +27,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       console.error('Não autorizado! Redirecionar para login...');
       window.location.href = '/';
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
     }
     return Promise.reject(error);
   }

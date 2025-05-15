@@ -14,6 +14,11 @@ const RegisterForm = () => {
       const [loading, setLoading] = useState(false);
 
       const navigate = useNavigate();
+
+      const onPressGoBack = (event) => {
+        event.preventDefault();
+        navigate("/");
+    };
     
       const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,7 +34,8 @@ const RegisterForm = () => {
         else if (form.password.length < 6) {
           newErrors.password = "Senha deve ter 6 ou mais caracteres";
         }
-        if (form.password !== form.confirmPassword) {
+        if (!form.confirmPassword) newErrors.confirmPassword = "Confirmar senha é obrigatório"
+        else if (form.password !== form.confirmPassword) {
           newErrors.confirmPassword = "Senhas não coincidem";
         }
     
@@ -58,13 +64,13 @@ const RegisterForm = () => {
                 Nome
             </label>
             <input
-                className="text-sm border-1 border-gray-500 rounded-lg p-2 w-full font-normal mb-2"
+                className="text-sm border-1 border-gray-500 rounded-lg p-2 w-full font-normal"
                 type="text"
                 placeholder="Insira seu nome"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
-            {errors.name && <p className="text-xs text-red-500 font-normal text-right">{errors.name}</p>}
+            <p className="text-sm text-red-500 font-normal text-right mt-2 h-5">{errors.name}</p>
           </div>
 
           <div className="flex flex-col w-full">
@@ -72,13 +78,13 @@ const RegisterForm = () => {
                   E-mail
               </label>
               <input
-                  className="text-sm border-1 border-gray-500 rounded-lg p-2 w-full font-normal mb-2"
+                  className="text-sm border-1 border-gray-500 rounded-lg p-2 w-full font-normal"
                   type="email"
                   placeholder="Insira seu e-mail"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
-              {errors.email && <p className="text-xs text-red-500 font-normal text-right">{errors.email}</p>}
+              <p className="text-sm text-red-500 font-normal text-right mt-2 h-5">{errors.email}</p>
           </div>
 
             <div className="flex flex-col w-full">
@@ -86,13 +92,13 @@ const RegisterForm = () => {
                   Senha
               </label>
               <input
-                  className="text-sm border-1 border-gray-500 rounded-lg p-2 w-full font-normal mb-2"
+                  className="text-sm border-1 border-gray-500 rounded-lg p-2 w-full font-normal"
                   type="password"
                   placeholder="Insira sua senha"
                   value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
-              {errors.password && <p className="text-xs text-red-500 font-normal text-right">{errors.password}</p>}
+              <p className="text-sm text-red-500 font-normal text-right mt-2 h-5">{errors.password}</p>
             </div>
 
             <div className="flex flex-col w-full">
@@ -106,18 +112,24 @@ const RegisterForm = () => {
                   value={form.confirmPassword}
                   onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
               />
-              {errors.confirmPassword && <p className="text-xs text-red-500 font-normal text-right">{errors.confirmPassword}</p>}
+              <p className="text-sm text-red-500 font-normal text-right mt-2 h-5">{errors.confirmPassword}</p>
             </div>
 
-            {errors.backend && <p className="text-xs text-red-500 font-normal mt-5">{errors.backend}</p>}
+            <p className="text-sm text-red-500 font-normal mt-5 h-5">{errors.backend}</p>
             
-            <div className="flex flex-col w-full items-end">
+            <div className="flex w-full justify-between">
                 <button
-                    className="text-sm bg-violet-800 hover:bg-violet-900 text-white rounded-3xl border-none px-10 py-2 cursor-pointer mt-5"
+                    className="text-sm bg-violet-800 hover:bg-violet-900 text-white rounded-3xl border-none px-10 py-2 cursor-pointer"
+                    onClick={(e) => onPressGoBack(e)}
+                >
+                    Voltar
+                </button>
+                <button
+                    className="text-sm bg-violet-800 hover:bg-violet-900 text-white rounded-3xl border-none px-10 py-2 cursor-pointer"
                     type="submit" 
                     disabled={loading}
                 >
-                    {loading ? "..." : "Cadastrar"}
+                    {loading ? "Cadastrando..." : "Cadastrar"}
                 </button>
             </div>
         </form>       

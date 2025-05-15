@@ -9,17 +9,17 @@ const HomeButtons = (props) => {
     } = props
 
     return (
-        <div className='md:grid w-full flex justify-between md:max-w-3xs items-center md:items-end md:h-60'>
-            <button onClick={() => onPressNewOrder()} className='bg-blue-700 hover:bg-blue-800 text-white font-medium text-[12px] sm:text-sm cursor-pointer py-4 rounded-4xl w-2/7 md:w-[200px] lg:w-[250px] h-15 sm:h-auto sm:w-1/4 px-2'>
+        <div className='grid gap-2 w-full md:max-w-72'>
+            <button onClick={() => onPressNewOrder()} className='bg-blue-700 hover:bg-blue-800 text-white font-medium text-sm cursor-pointer py-4 rounded-4xl w-full'>
                 Novo Pedido
             </button>
-            <button onClick={() => onPressPayment()} className='bg-green-700 hover:bg-green-800 text-white font-medium text-[12px] sm:text-sm cursor-pointer py-4 rounded-4xl w-2/7 md:w-[200px] lg:w-[250px] h-15 sm:h-auto sm:w-1/4 px-2'>
+            <button onClick={() => onPressPayment()} className='bg-green-700 hover:bg-green-800 text-white font-medium text-sm cursor-pointer py-4 rounded-4xl w-full'>
                 Pagamento
             </button>
-            <button onClick={() => onPressEditOrder()} className='bg-violet-700 hover:bg-violet-800 text-white font-medium text-[12px] sm:text-sm cursor-pointer py-4 rounded-4xl w-2/7 md:w-[200px] lg:w-[250px] h-15 sm:h-auto sm:w-1/4 px-2'>
+            <button onClick={() => onPressEditOrder()} className='bg-violet-700 hover:bg-violet-800 text-white font-medium text-sm cursor-pointer py-4 rounded-4xl w-full'>
                 Editar Pedido
             </button>
-            <button onClick={() => onPressCancelOrder()} className='bg-red-800 hover:bg-red-900 text-white font-medium text-[12px] sm:text-sm cursor-pointer py-4 rounded-4xl w-2/7 md:w-[200px] lg:w-[250px] h-15 sm:h-auto sm:w-1/4 px-2'>
+            <button onClick={() => onPressCancelOrder()} className='bg-red-800 hover:bg-red-900 text-white font-medium text-sm cursor-pointer py-4 rounded-4xl w-full'>
                 Cancelar Pedido
             </button>
       </div>

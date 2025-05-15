@@ -7,6 +7,8 @@ const CancelOrderModal = (props) => {
         isCancelOrderModalOpen,
         setIsCancelOrderModalOpen,
         pickedOrder,
+        onCancelOrder,
+        cancelLoading
     } = props
 
     return (
@@ -18,11 +20,16 @@ const CancelOrderModal = (props) => {
                     <button
                         onClick={() => setIsCancelOrderModalOpen(false)}
                         className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 cursor-pointer'
+                        disabled={cancelLoading}
                     >
                         Fechar
                     </button>
-                    <button className='px-4 py-2 bg-red-800 text-white rounded hover:bg-red-900 cursor-pointer'>
-                        Cancelar pedido
+                    <button 
+                        onClick={onCancelOrder}
+                        disabled={cancelLoading}
+                        className='px-4 py-2 bg-red-800 text-white rounded hover:bg-red-900 cursor-pointer'
+                    >
+                        {cancelLoading ? 'Cancelando...' : 'Cancelar pedido'}
                     </button>
                 </div>
             </div>

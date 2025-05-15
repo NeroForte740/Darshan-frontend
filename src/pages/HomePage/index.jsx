@@ -6,6 +6,8 @@ import HomeOrdersList from './components/HomeOrdersList';
 import CancelOrderModal from './components/CancelOrderModal';
 import EditOrderModal from './components/EditOrderModal';
 
+import { getAllOrders, cancelOrder } from '../../api/ordersService';
+
 function HomePage() {
   const [orders, setOrders] = useState([
       { id: 1, descricao: "Pizza Margherita" },
@@ -18,16 +20,56 @@ function HomePage() {
       { id: 8, descricao: "Espaguete Carbonara" },
       { id: 9, descricao: "Feijoada Completa" },
       { id: 10, descricao: "Sorvete de Chocolate com Calda" },
-  ])
+  ]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [cancelLoading, setCancelLoading] = useState(false);
 
-  const [pickedOrder, setPickedOrder] = useState()
+  const [pickedOrder, setPickedOrder] = useState(null);
 
-  const [isCancelOrderModalOpen, setIsCancelOrderModalOpen] = useState(false)
-  const [isEditOrderModalOpen, setIsEditOrderModalOpen] = useState(false)
+  const [isCancelOrderModalOpen, setIsCancelOrderModalOpen] = useState(false);
+  const [isEditOrderModalOpen, setIsEditOrderModalOpen] = useState(false);
 
   useEffect(() => {
-    console.log("picked order || ", pickedOrder)
-  }, [pickedOrder])
+    fetchOrders();
+  }, []);
+
+  const fetchOrders = async () => {
+    try {
+      setLoading(true);
+      const data = await getAllOrders();
+      console.log("data || ", data)
+      setOrders(data);
+      setError(null);
+    } catch (error) {
+      setError("Não foi possível carregar os pedidos. Tente novamente mais tarde.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancelOrder = async () => {
+    if (!pickedOrder) {
+      alert('Selecione um pedido para cancelar!');
+      return;
+    }
+
+    try {
+      setCancelLoading(true);
+      await cancelOrder(pickedOrder);
+      setIsCancelOrderModalOpen(false);
+      
+      fetchOrders();
+      
+      setPickedOrder(null);
+      
+      alert('Pedido cancelado com sucesso!');
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setCancelLoading(false);
+    }
+  };
 
   const onPressCancelOrder = () => {
     if(pickedOrder) {
@@ -55,14 +97,24 @@ function HomePage() {
 
   return (
     <div className='grid w-full h-full'>
-      <div className='w-full md:h-4/5 flex flex-col justify-around md:flex-row md:justify-between md:items-end md:pt-20'>
+      <div className='w-full md:h-full flex flex-col-reverse justify-around md:flex-row md:justify-between md:items-center'>
         <HomeButtons 
           onPressNewOrder={() => onPressNewOrder()}
           onPressPayment={() => onPressPayment()}
           onPressEditOrder={() => onPressEditOrder()}
           onPressCancelOrder={() => onPressCancelOrder()}
         />
-        <HomeOrdersList orders={orders} pickedOrder={pickedOrder} setPickedOrder={setPickedOrder} />
+        {loading ? (
+          <div className="flex items-center justify-center w-full">
+            <p className="text-lg text-gray-600">Carregando pedidos...</p>
+          </div>
+        ) : error ? (
+          <div className="flex items-center justify-center w-full">
+            <p className="text-lg text-red-600">{error}</p>
+          </div>
+        ) : (
+          <HomeOrdersList orders={orders} pickedOrder={pickedOrder} setPickedOrder={setPickedOrder} />
+        )}
       </div>
       <Footer />
       <EditOrderModal 
@@ -74,6 +126,8 @@ function HomePage() {
         isCancelOrderModalOpen={isCancelOrderModalOpen} 
         setIsCancelOrderModalOpen={setIsCancelOrderModalOpen} 
         pickedOrder={pickedOrder}
+        onCancelOrder={handleCancelOrder}
+        cancelLoading={cancelLoading}
       />
     </div>
   )
