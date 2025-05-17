@@ -6,13 +6,14 @@ import HomeOrdersList from './components/HomeOrdersList';
 import CancelOrderModal from './components/CancelOrderModal';
 import EditOrderModal from './components/EditOrderModal';
 
-import { getAllOrders, cancelOrder } from '../../api/ordersService';
+import { getAllOrders, cancelOrder, editOrder } from '../../api/ordersService';
 
 function HomePage() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [cancelLoading, setCancelLoading] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
 
   const [pickedOrder, setPickedOrder] = useState(null);
 
@@ -34,6 +35,29 @@ function HomePage() {
       setError("Não foi possível carregar os pedidos. Tente novamente mais tarde.");
     } finally {
       setLoading(false);
+    }
+  };
+
+   const handleEditOrder = async () => {
+    if (!pickedOrder) {
+      alert('Selecione um pedido para editar!');
+      return;
+    }
+
+    try {
+      setEditLoading(true);
+      await editOrder(pickedOrder);
+      setIsEditOrderModalOpen(false);
+      
+      fetchOrders();
+      
+      setPickedOrder(null);
+      
+      alert('Pedido editado com sucesso!');
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setEditLoading(false);
     }
   };
 
@@ -80,16 +104,11 @@ function HomePage() {
 
   }
 
-  const onClickPayment = () => {
-    
-  }
-
   return (
     <div className='grid w-full h-full'>
       <div className='w-full md:h-full flex flex-col-reverse justify-around md:flex-row md:justify-between md:items-center'>
         <HomeButtons 
           onClickNewOrder={() => onClickNewOrder()}
-          onClickPayment={() => onClickPayment()}
           onClickEditOrder={() => onClickEditOrder()}
           onClickCancelOrder={() => onClickCancelOrder()}
         />
@@ -105,11 +124,12 @@ function HomePage() {
           <HomeOrdersList orders={orders} pickedOrder={pickedOrder} setPickedOrder={setPickedOrder} />
         )}
       </div>
-      <Footer />
       <EditOrderModal 
         isEditOrderModalOpen={isEditOrderModalOpen}
         setIsEditOrderModalOpen={setIsEditOrderModalOpen}
         pickedOrder={pickedOrder}
+        onEditOrder={handleEditOrder}
+        editLoading={editLoading}
       />
       <CancelOrderModal 
         isCancelOrderModalOpen={isCancelOrderModalOpen} 

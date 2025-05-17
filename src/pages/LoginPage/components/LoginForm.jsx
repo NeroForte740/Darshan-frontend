@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import CustomButton from "../../../components/CustomButton";
+import CustomInput from "../../../components/CustomInput";
 
 import { loginUser } from "../../../api/authService";
 
@@ -47,33 +48,25 @@ const LoginForm = () => {
 
     return (
         <form className="grid md:p-5 lg:p-20 w-full max-w-lg" onSubmit={handleLogin}>
-            <div className="flex flex-col w-full items-start">
-                <div className="flex flex-col w-full">
-                    <label className="text-lg text-gray-700 font-normal mb-1 text-left">
-                        E-mail
-                    </label>
-                    <input
-                        className="text-sm border-1 border-gray-500 rounded-lg p-2 w-full font-normal mb-2"
-                        type="email"
-                        placeholder="Insira seu e-mail"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <p className="text-sm text-red-500 font-normal text-right h-5">{errors.email}</p>
-                </div>
-                <div className="flex flex-col w-full">
-                    <label className="text-lg text-gray-700 font-normal mb-1 text-left">
-                        Senha
-                    </label>
-                    <input
-                        className="text-sm border-1 border-gray-500 rounded-lg p-2 w-full font-normal mb-2"
-                        type="password"
-                        placeholder="Insira sua senha"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <p className="text-sm text-red-500 font-normal text-right h-5">{errors.password}</p>
-                </div>
+            <div className="grid w-full">
+                <CustomInput 
+                    label="E-mail"
+                    labelSize="text-lg"
+                    type="email"
+                    placeholder="Insira seu e-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    errorMessage={errors.email || " "}
+                />
+                <CustomInput 
+                    label="Senha"
+                    labelSize="text-lg"
+                    type="password"
+                    placeholder="Insira sua senha"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    errorMessage={errors.password || " "}
+                />
             </div>
             {errors.backend && <p className="text-sm text-red-500 font-normal mt-2">{errors.backend}</p>}
             <div className="flex w-full justify-between mt-8 gap-4">

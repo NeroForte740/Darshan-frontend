@@ -5,7 +5,6 @@ import CustomButton from "../../../components/CustomButton";
 const HomeButtons = (props) => {
     const {
         onClickNewOrder,
-        onClickPayment,
         onClickEditOrder,
         onClickCancelOrder,
     } = props
@@ -20,16 +19,9 @@ const HomeButtons = (props) => {
                 borderRadius="rounded-4xl"
             />
             <CustomButton 
-                onClick={() => onClickPayment()}
-                text="Pagamento"
-                color="green"
-                paddingVertical="py-3 md:py-4"
-                borderRadius="rounded-4xl"
-            />
-            <CustomButton 
                 onClick={() => onClickEditOrder()}
                 text="Editar Pedido"
-                color="purple"
+                color="green"
                 paddingVertical="py-3 md:py-4"
                 borderRadius="rounded-4xl"
             />

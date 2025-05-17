@@ -24,6 +24,7 @@ const CancelOrderModal = (props) => {
                         color="gray"
                         paddingVertical="py-2"
                         paddingHorizontal="px-4"
+                        borderRadius="rounded-2xl"
                     >
                         Fechar
                     </CustomButton>
@@ -33,6 +34,7 @@ const CancelOrderModal = (props) => {
                         color="red"
                         paddingVertical="py-2"
                         paddingHorizontal="px-4"
+                        borderRadius="rounded-2xl"
                         disabled={cancelLoading}
                     />
                 </div>
