@@ -5,6 +5,7 @@ import HomeButtons from './components/HomeButtons';
 import HomeOrdersList from './components/HomeOrdersList';
 import CancelOrderModal from './components/CancelOrderModal';
 import EditOrderModal from './components/EditOrderModal';
+import Header from '../../components/Header';
 
 import { getAllOrders, cancelOrder, editOrder } from '../../api/ordersService';
 
@@ -15,7 +16,11 @@ function HomePage() {
   const [cancelLoading, setCancelLoading] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
 
-  const [pickedOrder, setPickedOrder] = useState(null);
+  const [pickedOrder, setPickedOrder] = useState({});
+
+  const [paymentStatus, setPaymentStatus] = useState('');
+  const [orderStatus, setOrderStatus] = useState('');
+  const [orderDescription, setOrderDescription] = useState('');
 
   const [isCancelOrderModalOpen, setIsCancelOrderModalOpen] = useState(false);
   const [isEditOrderModalOpen, setIsEditOrderModalOpen] = useState(false);
@@ -28,7 +33,6 @@ function HomePage() {
     try {
       setLoading(true);
       const data = await getAllOrders();
-      console.log("data || ", data)
       setOrders(data);
       setError(null);
     } catch (error) {
@@ -46,12 +50,16 @@ function HomePage() {
 
     try {
       setEditLoading(true);
-      await editOrder(pickedOrder);
+      await editOrder(pickedOrder.ped_id, {
+          ped_description: orderDescription,
+          ped_status_preparo: orderStatus,
+          ped_status_pag: paymentStatus,
+      });
       setIsEditOrderModalOpen(false);
       
       fetchOrders();
       
-      setPickedOrder(null);
+      setPickedOrder({});
       
       alert('Pedido editado com sucesso!');
     } catch (error) {
@@ -69,12 +77,12 @@ function HomePage() {
 
     try {
       setCancelLoading(true);
-      await cancelOrder(pickedOrder);
+      await cancelOrder(pickedOrder.ped_id);
       setIsCancelOrderModalOpen(false);
       
       fetchOrders();
       
-      setPickedOrder(null);
+      setPickedOrder({});
       
       alert('Pedido cancelado com sucesso!');
     } catch (error) {
@@ -107,6 +115,7 @@ function HomePage() {
   return (
     <div className='grid w-full h-full'>
       <div className='w-full md:h-full flex flex-col-reverse justify-around md:flex-row md:justify-between md:items-center'>
+        <Header />
         <HomeButtons 
           onClickNewOrder={() => onClickNewOrder()}
           onClickEditOrder={() => onClickEditOrder()}
@@ -123,6 +132,7 @@ function HomePage() {
         ) : (
           <HomeOrdersList orders={orders} pickedOrder={pickedOrder} setPickedOrder={setPickedOrder} />
         )}
+        <Footer />
       </div>
       <EditOrderModal 
         isEditOrderModalOpen={isEditOrderModalOpen}
@@ -130,7 +140,13 @@ function HomePage() {
         pickedOrder={pickedOrder}
         onEditOrder={handleEditOrder}
         editLoading={editLoading}
-      />
+        paymentStatus={paymentStatus}
+        setPaymentStatus={setPaymentStatus}
+        orderStatus={orderStatus}
+        setOrderStatus={setOrderStatus}
+        orderDescription={orderDescription}
+        setOrderDescription={setOrderDescription}
+        />
       <CancelOrderModal 
         isCancelOrderModalOpen={isCancelOrderModalOpen} 
         setIsCancelOrderModalOpen={setIsCancelOrderModalOpen} 

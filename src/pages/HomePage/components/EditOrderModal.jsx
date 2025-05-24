@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Modal from '../../../components/Modal';
 import CustomButton from '../../../components/CustomButton';
@@ -11,28 +11,37 @@ const EditOrderModal = (props) => {
         pickedOrder,
         onEditOrder,
         editLoading,
+        paymentStatus, 
+        setPaymentStatus,
+        orderStatus, 
+        setOrderStatus,
+        orderDescription, 
+        setOrderDescription,
     } = props
 
     const paymentStatusOptions = [
         { value: '', label: 'Selecione o status de pagamento', disabled: true },
-        { value: 'pendente', label: 'Pendente' },
-        { value: 'pago', label: 'Pago' },
+        { value: 'Pendente', label: 'Pendente' },
+        { value: 'Pago', label: 'Pago' },
     ];
 
     const orderStatusOptions = [
         { value: '', label: 'Selecione o status do pedido', disabled: true },
-        { value: 'em_preparo', label: 'Em preparo' },
-        { value: 'em_transporte', label: 'Em transporte' },
-        { value: 'finalizado', label: 'Finalizado' },
+        { value: 'Em preparo', label: 'Em preparo' },
+        { value: 'Em transporte', label: 'Em transporte' },
+        { value: 'Finalizado', label: 'Finalizado' },
     ];
 
-    const [paymentStatus, setPaymentStatus] = useState('');
-    const [orderStatus, setOrderStatus] = useState('');
-    const [orderDescription, setOrderDescription] = useState('');
+    useEffect(() => {
+        console.log("picked || ", pickedOrder)
+        setPaymentStatus(pickedOrder.ped_status_pag);
+        setOrderStatus(pickedOrder.ped_status_preparo)
+        setOrderDescription(pickedOrder.ped_description)
+    }, [pickedOrder])
 
     return (
         <Modal isOpen={isEditOrderModalOpen} onClose={() => setIsEditOrderModalOpen(false)}>
-            <h2 className='text-xl font-bold mb-4'>{`Pedido ${pickedOrder}`}</h2>
+            <h2 className='text-xl font-bold mb-4'>{`Pedido ${pickedOrder.ped_id}`}</h2>
             <form className="grid w-full gap-4" onSubmit={onEditOrder}>
                 <div className="grid md:flex md:flex-row md:justify-between md:items-center w-full gap-4">
                     <div className="grid w-full">
@@ -92,7 +101,7 @@ const EditOrderModal = (props) => {
                             color="gray"
                             paddingVertical="py-2"
                             paddingHorizontal="px-4"
-                            borderRadius="rounded-2xl"
+                            borderRadius="rounded-sm"
                         />
                         <CustomButton 
                             type="submit"
@@ -100,7 +109,7 @@ const EditOrderModal = (props) => {
                             color="green"
                             paddingVertical="py-2"
                             paddingHorizontal="px-4"
-                            borderRadius="rounded-2xl"
+                            borderRadius="rounded-sm"
                             loading={editLoading}
                         />
                     </div>

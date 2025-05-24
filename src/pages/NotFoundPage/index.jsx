@@ -1,6 +1,7 @@
-const NotFoundPage = () => {
-    return <h1>Erro 404 - Página não encontrada</h1>;
-  };
+const NotFoundPage = () => (
+  <div className="grid w-full h-full">
+    <h1>404 - Página não encontrada!</h1>
+  </div>
+);
   
-  export default NotFoundPage;
-  
+export default NotFoundPage;

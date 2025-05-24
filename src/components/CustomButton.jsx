@@ -15,7 +15,7 @@ const CustomButton = ({ color, text, onClick, paddingVertical, paddingHorizontal
     return (
         <button 
             onClick={onClick} 
-            className={`${bgColor[color]} ${paddingVertical} ${paddingHorizontal} ${borderRadius} ${opacity} ${!paddingHorizontal && 'w-full'} text-white font-medium text-sm flex items-center justify-center`}
+            className={`${bgColor[color]} ${paddingVertical} ${paddingHorizontal} ${borderRadius} ${opacity} ${!paddingHorizontal && 'w-full'} text-white font-medium text-sm flex items-center justify-center active:opacity-50`}
             disabled={loading}
         >
             {loading? 

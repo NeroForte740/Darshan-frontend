@@ -97,15 +97,8 @@ const RegisterForm = () => {
             onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
             errorMessage={errors.confirmPassword || " "}
           />
-          <p className="text-sm text-red-500 font-normal mt-5 h-5">{errors.backend}</p>  
-          <div className="flex w-full justify-between gap-4">
-            <CustomButton
-              onClick={(e) => onClickGoBack(e)}
-              text="Voltar"
-              color="purple"
-              paddingVertical="py-2"
-              borderRadius="rounded-3xl"
-            />
+          <p className="text-sm text-red-500 font-normal mt-5 h-2 md:h-5">{errors.backend}</p>  
+          <div className="flex flex-row-reverse w-full justify-between gap-4">
             <CustomButton
               type="submit"
               text="Cadastrar"
@@ -113,6 +106,13 @@ const RegisterForm = () => {
               paddingVertical="py-2"
               borderRadius="rounded-3xl"
               loading={loading}
+            />
+            <CustomButton
+              onClick={(e) => onClickGoBack(e)}
+              text="Voltar"
+              color="purple"
+              paddingVertical="py-2"
+              borderRadius="rounded-3xl"
             />
           </div>
         </form>       

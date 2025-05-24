@@ -12,7 +12,7 @@ const CustomInput = ({ label, labelSize, type, placeholder, value, onChange, err
             value={value}
             onChange={onChange}
         />
-        {errorMessage && <p className="text-sm text-red-500 font-normal text-right h-5">{errorMessage}</p>}
+        {errorMessage && <p className="text-sm text-red-500 font-normal text-right h-2 md:h-5">{errorMessage}</p>}
     </div>
 )
 

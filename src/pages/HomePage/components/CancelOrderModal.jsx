@@ -14,7 +14,7 @@ const CancelOrderModal = (props) => {
 
     return (
         <Modal isOpen={isCancelOrderModalOpen} onClose={() => setIsCancelOrderModalOpen(false)}>
-            <h2 className='text-xl font-bold mb-4'>{`Pedido ${pickedOrder}`}</h2>
+            <h2 className='text-xl font-bold mb-4'>{`Pedido ${pickedOrder.ped_id}`}</h2>
             <p className='mb-4'>Deseja mesmo cancelar esse pedido?</p>
             <div className='flex justify-end space-x-2'>
                 <div className='flex justify-between items-center w-full'>
@@ -24,17 +24,15 @@ const CancelOrderModal = (props) => {
                         color="gray"
                         paddingVertical="py-2"
                         paddingHorizontal="px-4"
-                        borderRadius="rounded-2xl"
-                    >
-                        Fechar
-                    </CustomButton>
+                        borderRadius="rounded-sm"
+                    />
                     <CustomButton 
                         onClick={onCancelOrder}
                         text="Cancelar pedido"
                         color="red"
                         paddingVertical="py-2"
                         paddingHorizontal="px-4"
-                        borderRadius="rounded-2xl"
+                        borderRadius="rounded-sm"
                         disabled={cancelLoading}
                     />
                 </div>

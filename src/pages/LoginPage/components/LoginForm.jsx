@@ -69,14 +69,7 @@ const LoginForm = () => {
                 />
             </div>
             {errors.backend && <p className="text-sm text-red-500 font-normal mt-2">{errors.backend}</p>}
-            <div className="flex w-full justify-between mt-8 gap-4">
-                <CustomButton
-                    onClick={(e) => handleRegister(e)}
-                    text="Cadastrar"
-                    color="purple"
-                    paddingVertical="py-2"
-                    borderRadius="rounded-3xl"
-                />
+            <div className="flex flex-row-reverse w-full justify-between mt-8 gap-4">
                 <CustomButton
                     type="submit"
                     text='Entrar'
@@ -84,6 +77,13 @@ const LoginForm = () => {
                     paddingVertical="py-2"
                     borderRadius="rounded-3xl"
                     loading={loading}
+                />
+                <CustomButton
+                    onClick={(e) => handleRegister(e)}
+                    text="Cadastrar"
+                    color="purple"
+                    paddingVertical="py-2"
+                    borderRadius="rounded-3xl"
                 />
             </div>
         </form>       
