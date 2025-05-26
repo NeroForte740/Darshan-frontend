@@ -51,9 +51,10 @@ function HomePage() {
     try {
       setEditLoading(true);
       await editOrder(pickedOrder.ped_id, {
-          ped_description: orderDescription,
-          ped_status_preparo: orderStatus,
-          ped_status_pag: paymentStatus,
+        ...pickedOrder,
+        ped_description: orderDescription,
+        ped_status_preparo: orderStatus,
+        ped_status_pag: paymentStatus,
       });
       setIsEditOrderModalOpen(false);
       

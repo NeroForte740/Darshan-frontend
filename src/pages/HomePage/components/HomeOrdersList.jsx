@@ -12,7 +12,9 @@ const HomeOrdersList = (props) => {
             <span className='font-medium text-md mb-2'>Pedidos em Produção</span>
             <div className='grid h-full w-full max-h-90 md:max-h-130 pl-4 md:pl-8 overflow-auto'>
                 {orders && orders.length > 0 ? (
-                    orders.map((item, index) => (
+                    orders
+                    .sort((a, b) => a.ped_id - b.ped_id)
+                    .map((item, index) => (
                         <div 
                             key={index}
                             onClick={() => setPickedOrder(item)}
