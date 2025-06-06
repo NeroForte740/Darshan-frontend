@@ -7,6 +7,7 @@ const HomeButtons = (props) => {
         onClickNewOrder,
         onClickEditOrder,
         onClickCancelOrder,
+        onClickFinalizeOrder,
     } = props
 
     return (
@@ -29,6 +30,13 @@ const HomeButtons = (props) => {
                 onClick={() => onClickCancelOrder()}
                 text="Cancelar Pedido"
                 color="red"
+                paddingVertical="py-3 md:py-4"
+                borderRadius="rounded-4xl"
+            />
+            <CustomButton 
+                onClick={() => onClickFinalizeOrder()} 
+                text="Finalizar Pedido"
+                color="purple"
                 paddingVertical="py-3 md:py-4"
                 borderRadius="rounded-4xl"
             />

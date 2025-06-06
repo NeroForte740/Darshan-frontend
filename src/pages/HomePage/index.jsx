@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Footer from '../../components/Footer';
 import HomeButtons from './components/HomeButtons';
@@ -25,6 +26,8 @@ function HomePage() {
   const [isCancelOrderModalOpen, setIsCancelOrderModalOpen] = useState(false);
   const [isEditOrderModalOpen, setIsEditOrderModalOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchOrders();
   }, []);
@@ -43,30 +46,33 @@ function HomePage() {
   };
 
    const handleEditOrder = async () => {
-    if (!pickedOrder) {
-      alert('Selecione um pedido para editar!');
-      return;
-    }
-
-    try {
-      setEditLoading(true);
-      await editOrder(pickedOrder.ped_id, {
-        ...pickedOrder,
-        ped_description: orderDescription,
-        ped_status_preparo: orderStatus,
-        ped_status_pag: paymentStatus,
-      });
-      setIsEditOrderModalOpen(false);
-      
-      fetchOrders();
-      
-      setPickedOrder({});
-      
-      alert('Pedido editado com sucesso!');
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setEditLoading(false);
+     if (!pickedOrder) {
+       alert('Selecione um pedido para editar!');
+       return;
+     }
+    if(orderDescription.length >= 1) {
+      try {
+        setEditLoading(true);
+        await editOrder(pickedOrder.ped_id, {
+          ...pickedOrder,
+          ped_description: orderDescription,
+          ped_status_preparo: orderStatus,
+          ped_status_pag: paymentStatus,
+        });
+        setIsEditOrderModalOpen(false);
+        
+        fetchOrders();
+        
+        setPickedOrder({});
+        
+        alert('Pedido editado com sucesso!');
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        setEditLoading(false);
+      }
+    } else {
+      alert('Preencha a descrição do pedido')
     }
   };
 
@@ -94,23 +100,41 @@ function HomePage() {
   };
 
   const onClickCancelOrder = () => {
-    if(pickedOrder) {
-      setIsCancelOrderModalOpen(true)
+    if(pickedOrder.ped_id) {
+      setIsCancelOrderModalOpen(true);
     } else {
-      alert('Selecione um pedido para cancelar!')
+      alert('Selecione um pedido para cancelar!');
     }
   }
 
   const onClickEditOrder = () => {
-    if(pickedOrder) {
-      setIsEditOrderModalOpen(true)
+    if(pickedOrder.ped_id) {
+      setIsEditOrderModalOpen(true);
     } else {
-      alert('Selecione um pedido para editar!')
+      alert('Selecione um pedido para editar!');
     }
   }
 
   const onClickNewOrder = () => {
+    navigate("/newOrder");
+  }
 
+  const onClickFinalizeOrder = async () => {
+    if(pickedOrder.ped_id) {
+      try {
+      await cancelOrder(pickedOrder.ped_id);
+      fetchOrders();
+      setPickedOrder({});
+      
+      alert('Pedido finalizado com sucesso!');
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setCancelLoading(false);
+    }
+    } else {
+      alert('Selecione um pedido para finalizar!');
+    }
   }
 
   return (
@@ -121,6 +145,7 @@ function HomePage() {
           onClickNewOrder={() => onClickNewOrder()}
           onClickEditOrder={() => onClickEditOrder()}
           onClickCancelOrder={() => onClickCancelOrder()}
+          onClickFinalizeOrder={() => onClickFinalizeOrder()}
         />
         {loading ? (
           <div className="flex items-center justify-center w-full">

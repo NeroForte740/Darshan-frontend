@@ -33,7 +33,6 @@ const EditOrderModal = (props) => {
     ];
 
     useEffect(() => {
-        console.log("picked || ", pickedOrder)
         setPaymentStatus(pickedOrder.ped_status_pag);
         setOrderStatus(pickedOrder.ped_status_preparo)
         setOrderDescription(pickedOrder.ped_description)
@@ -92,6 +91,8 @@ const EditOrderModal = (props) => {
                     placeholder="Ex: 2 - Água, 1 - Coca cola..."
                     value={orderDescription}
                     onChange={(e) => setOrderDescription(e.target.value)}
+                    isTextArea={true}
+                    rows={4}
                 />
                 <div className='flex justify-end space-x-2'>
                     <div className='flex justify-between items-center w-full'>
@@ -111,6 +112,7 @@ const EditOrderModal = (props) => {
                             paddingHorizontal="px-4"
                             borderRadius="rounded-sm"
                             loading={editLoading}
+                            disabled={orderDescription?.length < 1}
                         />
                     </div>
                 </div>

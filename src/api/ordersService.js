@@ -31,3 +31,18 @@ export const cancelOrder = async (id) => {
     throw new Error(error.response?.data?.message || 'Erro ao cancelar o pedido');
   }
 };
+
+export const createOrder = async (order) => {
+  try {
+    const response = await api.post('/pedidos/create', {
+      description: order.description,
+      status_preparo: 'Em preparo',
+      status_pag: 'Pendente',
+      client: order.client,
+    });
+    
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || 'Erro ao criar o pedido');
+  }
+};
